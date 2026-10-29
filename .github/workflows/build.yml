@@ -1,4 +1,3 @@
-yaml
 name: Build Fanafarana Sisi APK
 
 on:
@@ -23,9 +22,10 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Install Dependencies
+      - name: Force Clean App Architecture
         run: |
-          flutter create . --org com.fanafarana.sisi
+          rm -rf *
+          flutter create . --org com.fanafarana.sisi --project-name fanafarana_sisi
           flutter pub get
 
       - name: Build APK Release
