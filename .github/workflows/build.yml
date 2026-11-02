@@ -9,7 +9,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -21,12 +22,10 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          cache: true
 
-      - name: Force Clean App Architecture
-        run: |
-          rm -rf *
-          flutter create . --org com.fanafarana.sisi --project-name fanafarana_sisi
-          flutter pub get
+      - name: Install Dependencies
+        run: flutter pub get
 
       - name: Build APK Release
         run: flutter build apk --release
@@ -36,3 +35,5 @@ jobs:
         with:
           name: Fanafarana_Sisi_APK
           path: build/app/outputs/flutter-apk/app-release.apk
+
+
